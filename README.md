@@ -18,21 +18,34 @@ export SENTRY_PROJECT=<fill this>
 export SENTRY_DSN=<fill this>
 ```
 
-# How to Reproduce - minified error
+### How to Reproduce - minified error
 Clone this, then:
 ```shell
 ./build.sh minified
 node minified/app.js
 ```
 
-# How to Reproduce - non-minified working
+### How to Reproduce - non-minified working
 Clone this, then:
 ```shell
 ./build.sh build
 node build/app.js
 ```
 
-# Additional useful commands
+## Finding the source line/column
+Edit `source-map.js` and provide correct line/column values then `node source-map.js`
+
+**What to expect:**
+```
+{
+  source: '/src/lib.ts',
+  line: 4,
+  column: 30,
+  name: null
+}
+```
+
+### Additional useful commands
 Delete release files in between tries:
 ```
 ./clean-release.sh

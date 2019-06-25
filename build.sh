@@ -14,7 +14,10 @@ npm i
 npm run clean
 npm run build
 VERSION=$(node -e 'console.log(require("./package.json").version)')
-./node_modules/.bin/sentry-cli releases new $VERSION
-./node_modules/.bin/sentry-cli releases files $VERSION \
-  upload-sourcemaps $BUILD_DIR --no-rewrite
-./node_modules/.bin/sentry-cli releases finalize $VERSION
+
+if [ "$SENTRY_DSN" != "" ]; then
+  ./node_modules/.bin/sentry-cli releases new $VERSION
+  ./node_modules/.bin/sentry-cli releases files $VERSION \
+    upload-sourcemaps $BUILD_DIR --no-rewrite
+  ./node_modules/.bin/sentry-cli releases finalize $VERSION
+fi
