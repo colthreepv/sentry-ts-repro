@@ -4,6 +4,9 @@ sentry-ts-repro
 The purpose is to compile a node+typescript project,
 then minify it, and have Sentry errors be trackable via SourceMap(s)
 
+**SPOILER ALERT**: node 10.x produces wrong error col/lines on minified sourcecode (that [should be the issue](https://github.com/nodejs/node/issues/2860)) 
+node 12.x on the other hand produces correct ones, as it uses more recent V8.
+
 # Prerequisities
 
 - Be registered on sentry.io
@@ -18,18 +21,18 @@ export SENTRY_PROJECT=<fill this>
 export SENTRY_DSN=<fill this>
 ```
 
-### How to Reproduce - minified error
-Clone this, then:
-```shell
-./build.sh minified
-node minified/app.js
-```
-
-### How to Reproduce - non-minified working
+### Build project
 Clone this, then:
 ```shell
 ./build.sh build
 node build/app.js
+```
+
+### Build project minified
+Clone this, then:
+```shell
+./build.sh minified
+node minified/app.js
 ```
 
 ## Finding the source line/column
